@@ -1,11 +1,13 @@
 import express from "express"
 import cors from "cors"
+import cookieParser from "cookie-parser"
 const app = express()
 
 //middlewares basic cofiguration
 app.use(express.json({limit: "60kb"}))
 app.use(express.urlencoded({extended:true, limit:"16kb"}))
 app.use(express.static("public"))
+app.use(cookieParser())
 
 //cors configurations
 app.use(cors({
