@@ -1,5 +1,9 @@
 import { body } from "express-validator";
 
+
+/* ======================================================
+   USER REGISTER VALIDATORS
+====================================================== */
 const userRegisterValidators = () => {
     return [
         //methods on validators
@@ -30,6 +34,9 @@ const userRegisterValidators = () => {
 
     ]
 }
+/* ======================================================
+   USER LOGIN VALIDATORS
+====================================================== */
 const userLoginvalidator = () => {
     return [
         body("email")
@@ -43,7 +50,42 @@ const userLoginvalidator = () => {
             .withMessage("password is required")
     ];
 };
-
+/* ======================================================
+   CHANGE CURRENT PASSWORD
+====================================================== */
+const userChangeCurrentPasswordValidators = () =>{
+    return [
+        body("oldPassword").notEmpty().withMessage("old password is required"),
+        body("newPassword").notEmpty().withMessage("new password is required"),
+    ]
+}
+/* ======================================================
+   USER FORGOT PASSWORD
+====================================================== */
+const userForgotPasswordValidator = ()=>{
+    return [
+        body("email")
+        .notEmpty()
+        .withMessage("Email is required")
+        .isEmail()
+        .withMessage("Email is invalid"),
+    ]
+}
+/* ======================================================
+   USER RESET FORGOT PASSWORD
+====================================================== */
+const userResetForgotPasswordvalidator = () => {
+    return [
+        body("newPassword")
+        .notEmpty()
+        .withMessage("Password is required")
+    ]
+}
 export {
-    userRegisterValidators, userLoginvalidator
+    userRegisterValidators,
+     userLoginvalidator,
+     userChangeCurrentPasswordValidators,
+     userForgotPasswordValidator,
+     userResetForgotPasswordvalidator
+     
 }
